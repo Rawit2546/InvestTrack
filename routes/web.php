@@ -22,3 +22,14 @@ Route::get('/dashboard', function () {
 })->middleware(['auth'])->name('dashboard');
 
 require __DIR__.'/auth.php';
+
+use Illuminate\Support\Facades\Artisan;
+
+Route::get('/force-migrate', function () {
+    try {
+        Artisan::call('migrate --force');
+        return "ฐานข้อมูลเชื่อมต่อและสร้างตารางสำเร็จแล้ว!";
+    } catch (\Exception $e) {
+        return "เกิดข้อผิดพลาด: " . $e->getMessage();
+    }
+});
