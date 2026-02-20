@@ -13,11 +13,10 @@ COPY . .
 
 RUN composer install --no-dev --optimize-autoloader
 
-# 👇 ต้องอยู่หลัง composer install
+RUN chmod -R 777 storage bootstrap/cache
+
 RUN php artisan config:clear
 RUN php artisan cache:clear
-RUN php artisan route:clear
-RUN php artisan view:clear
 
 EXPOSE 8000
 
