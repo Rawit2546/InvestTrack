@@ -1,5 +1,5 @@
-FROM php:8.3.15-cli AS base
-RUN echo "force rebuild"
+FROM php:8.3.15-cli
+
 WORKDIR /app
 
 RUN apt-get update && apt-get install -y \
@@ -17,6 +17,9 @@ RUN chmod -R 777 storage bootstrap/cache
 
 RUN php artisan config:clear
 RUN php artisan cache:clear
+
+# 👇 เพิ่มตรงนี้
+RUN php artisan migrate --force || true
 
 EXPOSE 8000
 
