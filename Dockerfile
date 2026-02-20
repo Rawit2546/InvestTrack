@@ -1,5 +1,5 @@
 FROM php:8.3.15-cli AS base
-
+RUN echo "force rebuild"
 WORKDIR /app
 
 RUN apt-get update && apt-get install -y \
