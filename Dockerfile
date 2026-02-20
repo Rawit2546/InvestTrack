@@ -1,10 +1,11 @@
-FROM php:8.2-cli
+FROM php:8.3-cli
 
 WORKDIR /app
 
 RUN apt-get update && apt-get install -y \
-    git unzip curl libzip-dev libpng-dev libonig-dev libxml2-dev \
-    && docker-php-ext-install pdo pdo_mysql mbstring zip exif pcntl
+    git unzip curl libzip-dev libpng-dev libonig-dev libxml2-dev libjpeg-dev \
+    && docker-php-ext-configure gd --with-jpeg \
+    && docker-php-ext-install pdo pdo_mysql mbstring zip exif pcntl gd
 
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
