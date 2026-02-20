@@ -16,4 +16,4 @@ RUN chmod -R 777 storage bootstrap/cache
 
 EXPOSE 8000
 
-CMD sh -c "php artisan config:clear && php artisan cache:clear && php -S 0.0.0.0:$PORT -t public"
+CMD php -S 0.0.0.0:$PORT -t public
