@@ -1,7 +1,5 @@
 FROM php:8.3.15-cli
 
-RUN echo "force rebuild v2"
-
 WORKDIR /app
 
 RUN apt-get update && apt-get install -y \
@@ -18,4 +16,4 @@ RUN chmod -R 777 storage bootstrap/cache
 
 EXPOSE 8000
 
-CMD sh -c "php artisan migrate --force || true && php artisan serve --host=0.0.0.0 --port=$PORT"
+CMD sh -c "php artisan config:clear && php artisan cache:clear && php -S 0.0.0.0:$PORT -t public"
